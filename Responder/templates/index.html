@@ -1,0 +1,93 @@
+<head>
+  <link rel="stylesheet" href={{ url_for('static', filename='css/main_templated.css') }} />
+</head>
+
+{% extends 'base.html' %}
+{% block sub_content %}
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner split">
+					<section>
+						<h2>Welcome to Crowdsourced data, a knowledge sharing site</h2>
+					</section>
+					<section>
+						<p> Crowdsourcing, the outsourcing of tasks to a crowd of unknown
+              people (“Workers”) in an open call, is rapidly rising
+              in popularity. It is already being heavily used by numerous
+              employers (“Requesters”) for tasks ranging from
+              audio transcription to NLP data annotation. </p>
+						<ul class="actions">
+							<li>
+                <a target="_blank" href="http://aiweb.cs.washington.edu/ai/pubs/drapeau-hcomp16.pdf" class="button special">
+                  Learn more </a> </li>
+						</ul>
+					</section>
+				</div>
+			</section>
+
+		<!-- One -->
+			<!--<section id="one" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h2> My Questions </h2>
+						<p> Your updates. Lorem ipsum nisl sed cursus magna et amet veroeros. Sed phasellus aliquam et tempus lorem feugiat adipiscing lorem. Morbi pharetra vitae felis placerat pharetra. Nulla risus orci, dapibus id malesuada et nec, malesuada quis orci. Pellentesque eget consequat.</p>
+						<ul class="actions">
+							<li><a href="#" class="button alt">Link to pdf file</a></li>
+						</ul>
+					</section>
+					<section>
+						<ul class="checklist">
+							<li>Pointers 1</li>
+							<li>Pointers 2</li>
+							<li>Tempus lorem adipiscing et lorem</li>
+							<li>Morbi pharetra vitae felis placerat</li>
+							<li>Pharetra nulla risus orci dapibus</li>
+						</ul>
+					</section>
+				</div>
+			</section> -->
+
+		<!-- Two -->
+			<section id="two" class="wrapper style2 alt">
+				<div class="inner">
+          {% if results %}
+            {% for result in results %}
+    					<div class="spotlight">
+    						<div class="image">
+    							<img src="data:;base64,{{ result["image_blob"] }}" alt={{ result['image_name'] }} style="width:100%"/>
+    						</div>
+    						<div class="content">
+    							<h3>
+                    {{ result['image_catg'] }}
+                  </h3>
+    							<p> {{ result['question'] | safe}} </p>
+    							<ul class="actions">
+    								<li><a href="/questions/{{ result['qid'] }}" class="button alt">Details</a></li>
+    							</ul>
+    						</div>
+    					</div>
+            {% endfor %}
+          {% else %}
+            <h3> No questions yet </h3>
+          {% endif %}
+          <ul class="actions special">
+						<li><a href="#" class="button alt">Back to Top</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					Copyrights
+					&copy; Untitled. All rights reserved. Images: <a target="_blank" href="http://unsplash.com">Unsplash</a>. Design: <a target="_blank" href="http://templated.co">TEMPLATED</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src={{ url_for('static', filename='js/jquery.min.js') }}></script>
+			<script src={{ url_for('static', filename='js/skel.min.js') }}></script>
+			<script src={{ url_for('static', filename='js/util.js') }}></script>
+			<script src={{ url_for('static', filename='js/main.js') }}></script>
+
+{% endblock %}

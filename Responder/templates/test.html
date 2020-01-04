@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block sub_content %}
+
+  {% if result %}
+    <div id = "question-container">
+      <div id = "question">
+        <h1> {{result['question'] | safe}} </h1>
+      </div>
+    </div>
+    <div id = "image-container">
+      <img id = "image" src = "data:;base64, {{ result['image_blob']}}"/>
+    </div>
+    <div id = "conv-container">
+      {% if conversations %}
+        <div id="container">
+          <ul id="comments">
+            {% for conversation in conversations %}
+            <li class="cmmnt">
+              <div class="avatar"><a href="javascript:void(0);"><img src="../images/avatar.png" width="55" height="55" alt="Avatar"></a></div>
+              <div class="cmmnt-content">
+                <header><a href="javascript:void(0);" class="userlink">DarkCubes</a> - <span class="pubdate">posted on {{ conversation["conv_logtime"] }}</span></header>
+                <span> Conversation: {{ conversations['conv_id'] }} </span>
+                <span id = "convStatus"> {{ conversations['status'] }} </span>
+                <button type="button" class = "seek" onclick="alert('Accept and close answer!')"> Accept </button>
+                <button type="button" class = "seek" onclick="alert('Reject and close answer!')"> Reject </button>
+              </div>
+              {% for replies in conversation["replies"] %}
+              <ul class="replies">
+                <li class="cmmnt">
+                  <div class="avatar"><a href="javascript:void(0);"><img src="../images/avatar.png" width="55" height="55" alt="Avatar"></a></div>
+                  <div class="cmmnt-content">
+                  <header><a href="javascript:void(0);" class="userlink">{{replies["user_email"]}}</a> - <span class="pubdate">posted on {{ replies["reply_logtime"] }}</span></header>
+                  <p>{{ replies["reply"] | safe}}</p>
+                  </div>
+                </li>
+              </ul>
+              {% endfor %}
+            </li>
+            {% endfor %}
+
+          </ul>
+        </div>
+
+      {% else %}
+        <h3> No blogs have been written yet </h3>
+      {% endif %}
+    </div>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block sub_content %}
+{% if conversations %}
+<!-- COMMENTS -->
+  <div>
+  <h3>Conversations</h3>
+  <div class = "imgDiv">
+    <img id = "image" src="data:;base64,{{ result["image_blob"] }}"/>
+  </div>
+
+  {% for conversation in conversations %}
+  <div class="upp-comments">
+    <div class="upp-comment">
+      <form method="POST">
+        <div class="upp-com-auth">
+          <img class="upp-img-person" src="https://cdn.dribbble.com/users/261045/screenshots/2868549/rq-app01.png" alt="">
+          <b class="upp-com-auth-name" >Conversation started by   <mark style ="text-transform: capitalize">{{ conversation["started_by"] }}</mark></b>
+          <span class="upp-com-auth-ts">{{ conversation["conv_logtime"] }}</span>
+          {% if ((conversation["status"] == "Open") and (result['userType'] == "Requestor")) %}
+          <button type="button" style="height:30px;width:60px;font-size:12px" class="btn btn-primary"  id="Accept.{{ conversation["conv_id"] }}" onclick="postAcceptReject(this.id)">Accept</button>
+          &nbsp&nbsp
+          <button type="button" style="height:30px;width:60px;font-size:12px" class="btn btn-default" id="Reject.{{ conversation["conv_id"] }}" onclick="postAcceptReject(this.id)">Reject</button>
+          {% endif %}
+          {% if conversation["status"] == "Accept" %}
+          <span  class="label label-success">Accepted</span>
+          {% endif %}
+          {% if conversation["status"] == "Reject" %}
+          <span  class="label label-danger">Rejected</span>
+          {% endif %}
+        </div>
+      </form>
+      <div class="upp-com-content">
+        <span style="display: inline-block" class="label label-default">Question</span>
+        <p style="display: inline-block">
+          {{ result['question'] | safe }}
+        </p>
+        <div class="upp-com-replies">
+          {% for replies in conversation["replies"] %}
+          <div class="upp-comment">
+            <div class="upp-com-auth">
+              <img class="upp-img-person" src="https://click4m.madhyamam.com/Appresources/images/man.svg" alt="">
+              <b class="upp-com-auth-name" style ="text-transform: capitalize">{{ replies["user_name"]}}</b>
+              <span class="upp-com-auth-ts">{{ replies["reply_logtime"] }}</span>
+              {% if replies["reply_type"] == "Response" %}
+              <span style="display: inline-block" class="label label-default">Response</span>
+              {% endif %}
+              {% if replies["reply_type"] == "Clue" %}
+              <span style="display: inline-block" class="label label-primary">Clue</span>
+              {% endif %}
+              {% if replies["reply_type"] == "Justify" %}
+              <span style="display: inline-block" class="label label-info">Justify</span>
+              {% endif %}
+            </div>
+            <div class="upp-com-content">
+              <p>
+                {{ replies['reply'] }}
+              </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% if conversation["status"] == "Open" %}
+  <div class="upp-comment-box first">
+    <form method="POST">
+      <div class="upp-comment-box-avatar">
+        <a href="https://twitter.com/thinkdj" target="_blank" title="thinkdj">
+    			<img src="https://accounts-cdn.9gag.com/media/avatar/872741_100_5.jpg">
+    		</a>
+      </div>
+
+      {% if result['userType'] == "Requestor" %}
+      <div style="display: inline-block">
+      <input type="radio" name="radio" id="radio1" class="radio" value = "Clue" checked/>
+      <label for="radio1">Clue</label>
+      </div>
+
+      <div style="display: inline-block">
+      <input type="radio" name="radio" id="radio2" class="radio" value = "Justify"/>
+      <label for="radio2">Justify</label>
+      </div>
+
+      <div style="display: inline-block">
+      <input type="radio" name="radio" id="radio3" class="radio" value = "Response"/>
+      <label for="radio3">Response</label>
+      </div>
+      {% endif %}
+
+    <div class="upp-comment-box-comm">
+      <div class="upp-comment-box-comm-ent">
+        <!-- <textarea name="textarea" placeholder="Your opinion ..." class="upp-comment-box-comm-ent-ta focus" required></textarea> -->
+        <input type="text" name="{{ conversation["conv_id"] }}" placeholder="Your opinion ..." class="upp-comment-box-comm-ent-ta focus"></input>
+      </div>
+      <div class="upp-comment-box-comm-actions">
+        <div class="upp-comment-box-comm-actions-meta">
+
+          <small class="upp-small">
+          <!-- Footer text -->
+          Do not post profanity. Repeat-offenders would be banned permanently.
+          </small>
+        </div>
+        <div class="upp-comment-box-comm-actions-action">
+          <p class="upp-comment-box-comm-word-count tc"><span>1000</span></p>
+          <button type = "Submit" class="upp-btn"> Post </button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  </div>
+</form>
+<!-- /COMMENTS -->
+{% else %}
+<div class="upp-com-content">
+  <span style="display: inline-block" class="label label-default">Question</span>
+  <p style="display: inline-block">
+    {{ result['question'] | safe }}
+  </p>
+</div>
+<div class="upp-comment-box first">
+  <form method="POST">
+    <div class="upp-comment-box-avatar">
+      <a href="https://twitter.com/thinkdj" target="_blank" title="thinkdj">
+        <img src="https://accounts-cdn.9gag.com/media/avatar/872741_100_5.jpg">
+      </a>
+    </div>
+    {% if result['userType'] == "Requestor" %}
+    <div style="display: inline-block">
+    <input type="radio" name="radio" id="radio1" class="radio" value = "Clue" checked/>
+    <label for="radio1">Clue</label>
+    </div>
+
+    <div style="display: inline-block">
+    <input type="radio" name="radio" id="radio2" class="radio" value = "Justify"/>
+    <label for="radio2">Justify</label>
+    </div>
+
+    <div style="display: inline-block">
+    <input type="radio" name="radio" id="radio3" class="radio" value = "Response"/>
+    <label for="radio3">Response</label>
+    </div>
+    {% endif %}
+  <div class="upp-comment-box-comm">
+    <div class="upp-comment-box-comm-ent">
+      <!-- <textarea name="textarea" placeholder="Your opinion ..." class="upp-comment-box-comm-ent-ta focus" required></textarea> -->
+      <input type="text" name="new_conv" placeholder="Your opinion ..." class="upp-comment-box-comm-ent-ta focus"></input>
+    </div>
+    <div class="upp-comment-box-comm-actions">
+      <div class="upp-comment-box-comm-actions-meta">
+
+        <small class="upp-small">
+        <!-- Footer text -->
+        Do not post profanity. Repeat-offenders would be banned permanently.
+        </small>
+      </div>
+      <div class="upp-comment-box-comm-actions-action">
+        <p class="upp-comment-box-comm-word-count tc"><span>1000</span></p>
+        <button type = "Submit" class="upp-btn"> Post </button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+{% endif %}
+
+{% endblock %}

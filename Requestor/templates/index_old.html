@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block sub_content %}
+  {% if results %}
+    {% for result in results %}
+    <h3 class = "text-center">
+      <a href = "/questions/{{ result['qid'] }}">
+        {{ result['question'] | safe }} </a>
+    </h3>
+      <div class="polaroid">
+        <img src="data:;base64,{{ result["image_blob"] }}" alt={{ result['image_name'] }} style="width:100%"/>
+        <div class="container">
+          <h3 >{{ result['image_name'] }}</h3>
+        </div>
+      </div>
+      <h5 class = "text-center"> Status :  {{ result['status'] }} </h5>
+    <hr>
+    {% endfor %}
+  {% else %}
+    <h3> No questions yet </h3>
+  {% endif %}
+{% endblock %}
