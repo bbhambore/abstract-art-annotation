@@ -78,7 +78,7 @@
     /* threaded html 2 */
     .upp-comments {
       margin: 40px 0;
-      padding-left: 10%;
+      /* padding-left: 10%; */
     }
 
     .upp-comment {
@@ -145,7 +145,8 @@
     }
 
     .upp-comment-box-comm-ent {
-      width: 100%
+      width: 100%;
+      margin: 0;
     }
 
     .upp-comment-box-comm-ent-ta {
@@ -178,6 +179,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: 0;
     }
 
     .upp-comment-box-comm-actions-meta {
@@ -314,4 +316,15 @@ input.radio:focus ~ label:before {
 #image {
   width: 400px;
   height: 300px;
+}
+
+div {
+  clear: both;
+  margin: 0 50px;
+}
+
+#image {
+  border: 1px solid #ddd;
+  border-radius: 10%;
+  padding: 5px;
 }

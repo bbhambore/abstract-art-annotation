@@ -123,6 +123,9 @@
     {{ result['question'] | safe }}
   </p>
 </div>
+<div class = "imgDiv" style = "position: absolute;  top: 30%;  right: 10px;">
+  <img style = "width: 400px; height: 300px;" id = "image" src="data:;base64,{{ result["image_blob"] }}"/>
+</div>
 <div class="upp-comment-box first">
   <form method="POST">
     <!-- <div class="upp-comment-box-avatar">
