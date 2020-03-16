@@ -54,7 +54,9 @@
             {% for result in results %}
     					<div class="spotlight">
     						<div class="image">
-    							<img src="data:;base64,{{ result["image_blob"] }}" alt={{ result['image_name'] }} style="width:100%"/>
+                  <a href="/questions/{{ result['qid'] }}">
+                    <img src="data:;base64,{{ result["image_blob"] }}" alt={{ result['image_name'] }} style="width:100%"/>
+                  </a>
     						</div>
     						<div class="content">
     							<h3>
