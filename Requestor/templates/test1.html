@@ -16,7 +16,7 @@
           <img class="upp-img-person" src="https://cdn.dribbble.com/users/261045/screenshots/2868549/rq-app01.png" alt="">
           <b class="upp-com-auth-name" >Conversation started by   <mark style ="text-transform: capitalize">{{ conversation["started_by"] }}</mark></b>
           <span class="upp-com-auth-ts">{{ conversation["conv_logtime"] }}</span>
-          {% if ((conversation["status"] == "Open") and (result['userType'] == "Requestor")) %}
+          {% if ((conversation["status"] == "Open") and (result['userType'] == "Requester")) %}
           <button type="button" style="height:30px;width:60px;font-size:12px" class="btn btn-primary"  id="Accept.{{ conversation["conv_id"] }}" onclick="postAcceptReject(this.id)">Accept</button>
           &nbsp&nbsp
           <button type="button" style="height:30px;width:60px;font-size:12px" class="btn btn-default" id="Reject.{{ conversation["conv_id"] }}" onclick="postAcceptReject(this.id)">Reject</button>
@@ -72,7 +72,7 @@
     		</a>
       </div>
 
-      {% if result['userType'] == "Requestor" %}
+      {% if result['userType'] == "Requester" %}
       <div style="display: inline-block">
       <input type="radio" name="radio" id="radio1" class="radio" value = "Clue" checked/>
       <label for="radio1">Clue</label>

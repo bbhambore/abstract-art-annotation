@@ -196,7 +196,7 @@ def login():
                 if user['user_type'] == "Responder":
                     session.clear()
                     cur.close()
-                    flash('Only Requestors can login', 'info')
+                    flash('Only Requesters can login', 'info')
                     return redirect('/login')
                 session['userType'] = user['user_type']
                 # print(session)
