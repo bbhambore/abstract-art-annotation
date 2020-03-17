@@ -13,12 +13,14 @@
                dataType: 'json',
                url: '/AcceptReject',
                success: function (e) {
-                   console.log(e);
+                   console.log("Success", e);
                    // window.location = "/preview";
+                   location.replace("/");
                },
                error: function(error) {
-               console.log(error);
-           }
+                   console.log("Inside error", error);
+                   location.replace("/");
+               }
            });
          }
    </script>
@@ -26,7 +28,7 @@
   <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}>
 {% endblock %}
 {% block title %}
-  Title
+  Requester
 {% endblock %}
 
 {% block navbar %}

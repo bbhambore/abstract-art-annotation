@@ -117,7 +117,7 @@
     .upp-comment-box {
       padding-top: 10px;
       display: flex;
-      padding-left: 10%;
+      /* padding-left: 10%; */
     }
 
     .upp-comment-box-avatar {
@@ -323,7 +323,6 @@ input.radio:focus ~ label:before {
 }
 
 div {
-  clear: both;
   margin: 0 50px;
 }
 

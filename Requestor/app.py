@@ -147,6 +147,7 @@ def questions(id):
 def foo():
     if request.method == 'POST':
         data = request.get_json(force=True)
+        # print(data)
         status = str(data["buttonID"]).split(".")[0]
         conv_id = str(data["buttonID"]).split(".")[1]
         cur = mysql.connection.cursor()
@@ -154,7 +155,7 @@ def foo():
         cur.execute(query,(status,conv_id))
         mysql.connection.commit()
         cur.close()
-    return render_template('test1.html')
+    return render_template('index.html', results = None)
 
 @app.route('/register/', methods = ['GET', 'POST'])
 def register():
