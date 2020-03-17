@@ -1,4 +1,4 @@
 mysql_host: 'localhost'
 mysql_user: 'user'
-mysql_password: 'Welcome123$'
+mysql_password: 'password'
 mysql_db: 'abstractdb'
